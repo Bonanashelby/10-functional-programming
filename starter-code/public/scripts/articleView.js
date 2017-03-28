@@ -1,10 +1,9 @@
 'use strict';
+(function(module) {
 
 // TODO: Wrap the entire contents of this file in an IIFE.
 // Pass in to the IIFE a module, upon which objects can be attached for later access.
 // We think this is what we're supposed to do here ??? -anna-kevin touched this
-(function(){
-  var unicorn = function(){
 
   var articleView = {};
 
@@ -112,8 +111,7 @@
 
   articleView.initAdminPage = function() {
     // TODO: Call the Handlebars `.compile` function, which will return a function for you to use where needed.
-    // We think this is what we are supposed to do -anna-kevin touched this 
-    let source = $('.author-stats').html();
+    let source = $('#author-template').html();
     let template = Handlebars.compile(source);
 
     // REVIEW: We use `forEach` here because we are relying on the side-effects of the callback function:
@@ -124,7 +122,7 @@
     // REVIEW: Simply write the correct values to the page:
     $('#blog-stats .articles').text(Article.all.length);
     $('#blog-stats .words').text(Article.numWordsAll());
+    return template(this);
   };
-};
-window.onload = unicorn;
-}());
+  module.articleView = articleView;
+})(window);
